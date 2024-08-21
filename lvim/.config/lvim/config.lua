@@ -4,9 +4,8 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 --
-vim.opt.relativenumber = true
-
 lvim.leader=';'
+vim.opt.relativenumber = true
 vim.g["diagnostics_active"] = true
 
 function Toggle_diagnostics()
@@ -27,7 +26,7 @@ lvim.plugins = {
 
 lvim.builtin.which_key.mappings["lh"]  = { "<cmd>lua Toggle_diagnostics()<CR>", "Toggle Diagnostics" }
 lvim.builtin.which_key.mappings["bc"] = lvim.builtin.which_key.mappings.c
-lvim.builtin.which_key.mappings.c = {}
+lvim.builtin.which_key.mappings.c = {} -- Remove reassigned 'c' mapping
 lvim.builtin.which_key.mappings.f = lvim.builtin.which_key.mappings.s
 lvim.builtin.which_key.mappings.s = {} -- Remove reassigned 's' mapping
 lvim.builtin.which_key.mappings.f["g"] = lvim.builtin.which_key.mappings.f["t"]
@@ -36,5 +35,7 @@ lvim.builtin.which_key.mappings.f.c = lvim.builtin.which_key.mappings.L.c -- Add
 lvim.builtin.which_key.mappings["dB"] = lvim.builtin.which_key.mappings.d.b
 lvim.builtin.which_key.mappings["db"] = { "obreakpoint()<ESC>", "Set breakpoint()"}
 
+-- Terminal configuration options
 lvim.builtin.terminal.open_mapping = '<c-_>'
+-- Use <ESC> to escape terminal input mode
 vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', {noremap = true, silent = true})
