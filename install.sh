@@ -1,3 +1,3 @@
 echo "Stowing config files"
 set -x
-stow nvim
+stow -t $HOME -S nvim
