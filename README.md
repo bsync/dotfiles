@@ -1,7 +1,9 @@
-This repo is designed to be used nix.
+This repo uses nix home-manager to setup my home directories from scratch on new linux distros.
 
-To install nix first run:
+clone the repo into your home directory and run ./dotfiles/install.sh
 
-clone the repo into your home directory
-cd into it
-run install.sh
+The install script "should" perform the following operations:
+    - install nix 
+    - install home-manager
+    - sym link .config/home-manager to point at the home-manager directory in the cloned repo
+    - use the home-manager to install the nix packages and configurations listed in home.nix
