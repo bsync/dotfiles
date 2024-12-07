@@ -49,11 +49,24 @@ vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete the current b
 
 vim.keymap.set("n", "<leader>lr", function()
 	for name, _ in pairs(package.loaded) do
-		if name:match("^kickstart") or name:match("^keymap") then -- Adjust 'myconfig' to match your Lua namespace
+		if name:match("^kickstart") or name:match("^keymap") then
 			package.loaded[name] = nil
 		end
 	end
 	dofile(vim.env.MYVIMRC) -- Reload init.lua
-end, { desc = "Reload select Lua modules" })
+end, { desc = "Reload Lua modules" })
+
+-- Toggle diagnostics on/off with
+vim.g["diagnostics_active"] = true
+function Toggle_diagnostics()
+	if vim.g.diagnostics_active then
+		vim.g.diagnostics_active = false
+		vim.diagnostic.enable(false)
+	else
+		vim.g.diagnostics_active = true
+		vim.diagnostic.enable()
+	end
+end
+vim.keymap.set("n", "<leader>xh", ":lua Toggle_diagnostics()<CR>", { desc = "Toggle Diagnostics" })
 
 -- vim: ts=2 sts=2 sw=2 et
