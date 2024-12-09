@@ -5,6 +5,22 @@
 --
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+
+-- Function to delete selected buffers
+local function delete_selected_buffers(prompt_bufnr)
+	local picker = action_state.get_current_picker(prompt_bufnr)
+	local selected_entries = picker:get_multi_selection()
+
+	-- Close selected buffers
+	for _, entry in ipairs(selected_entries) do
+		vim.api.nvim_buf_delete(entry.bufnr, { force = true })
+	end
+
+	actions.close(prompt_bufnr)
+end
+
 return {
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
@@ -56,12 +72,17 @@ return {
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
-				-- pickers = {}
+				defaults = {
+					mappings = {
+						i = {
+							["<C-d>"] = delete_selected_buffers,
+							["<c-enter>"] = "to_fuzzy_refine",
+						},
+					},
+					n = {
+						["<C-d>"] = delete_selected_buffers,
+					},
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -94,7 +115,7 @@ return {
 					winblend = 10,
 					previewer = false,
 				}))
-			end, { desc = "[/] Fuzzily sind in current buffer" })
+			end, { desc = "[/] Fuzzily find in current buffer" })
 
 			-- It's also possible to pass additional configuration options.
 			--  See `:help telescope.builtin.live_grep()` for information about particular keys
