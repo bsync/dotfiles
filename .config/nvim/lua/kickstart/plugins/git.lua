@@ -1,37 +1,13 @@
 return {
 	{
-		"kdheepak/lazygit.nvim",
-		lazy = true,
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		-- optional for floating window border decoration
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		-- setting the keybinding for LazyGit with 'keys' is recommended in
-		-- order to load the plugin when the command is run for the first time
-		keys = { { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" } },
-	},
-	{
-		"NeogitOrg/neogit",
-		lazy = true,
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
-
-			-- Only one of these is needed.
-			"nvim-telescope/telescope.nvim", -- optional
-			--"ibhagwan/fzf-lua", -- optional
-			--"echasnovski/mini.pick", -- optional
-		},
-		keys = { { "<leader>gn", "<cmd>Neogit kind=vsplit<cr>", desc = "NeoGit" } },
+		"lewis6991/gitsigns.nvim",
 		config = true,
-		cmd = "Neogit",
+		keys = {
+			{ "<leader>gd", "<cmd>Gitsigns preview_hunk<CR>", desc = "Show changes to current hunk" },
+			{ "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", desc = "Reset changes to current hunk" },
+			{ "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", desc = "Navigate to previous hunk" },
+			{ "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", desc = "Navigate to next hunk" },
+		},
 	},
 	"sindrets/diffview.nvim", -- optional - Diff integration
 }

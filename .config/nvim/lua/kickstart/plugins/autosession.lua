@@ -2,7 +2,7 @@ return {
 	"rmagatti/auto-session",
 	config = function()
 		require("auto-session").setup({
-			auto_restore = true,
+			auto_restore = false,
 			suppressed_dirs = { "~/", "/" },
 		})
 	end,

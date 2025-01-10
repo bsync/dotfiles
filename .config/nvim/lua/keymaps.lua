@@ -45,8 +45,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete the current buffer" })
-
 vim.keymap.set("n", "<leader>lr", function()
 	for name, _ in pairs(package.loaded) do
 		if name:match("^kickstart") or name:match("^keymap") then
@@ -67,6 +65,5 @@ function Toggle_diagnostics()
 		vim.diagnostic.enable()
 	end
 end
-vim.keymap.set("n", "<leader>xh", ":lua Toggle_diagnostics()<CR>", { desc = "Toggle Diagnostics" })
 
 -- vim: ts=2 sts=2 sw=2 et
