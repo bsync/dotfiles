@@ -121,8 +121,8 @@ return {
 			--  See `:help telescope.builtin.live_grep()` for information about particular keys
 			vim.keymap.set("n", "<leader>s/", function()
 				builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = "Live Grep in Open Files",
+					cwd = "src/",
+					prompt_title = "Live Grep in src/",
 				})
 			end, { desc = "[S]each [/] in Open Files" })
 
