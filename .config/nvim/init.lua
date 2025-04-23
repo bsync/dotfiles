@@ -2,9 +2,14 @@
 vim.g.mapleader = ";"
 vim.g.maplocalleader = ";"
 vim.opt.relativenumber = true
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+
+vim.diagnostic.config({
+	virtual_text = true,
+})
 
 -- [[ Setting options ]]
 require("options")
