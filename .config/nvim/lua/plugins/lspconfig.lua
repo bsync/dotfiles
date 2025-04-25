@@ -195,6 +195,29 @@ return {
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
 				-- ts_ls = {},
 				--
+				pylsp = {
+					settings = {
+						pylsp = {
+							plugins = {
+								autopep8 = {
+									enabled = true,
+									args = { "--aggressive" },
+								},
+								pycodestyle = {
+									enabled = true,
+									maxLineLength = 120,
+								},
+								pyflakes = { enabled = true },
+								pylsp_mypy = { enabled = true },
+								pylsp_rope = { enabled = true, rope_autoimport = { enabled = true } },
+								pylsp_black = { enabled = true },
+								pyls_isort = { enabled = true },
+								rope_autoimport = { enabled = true },
+								mccabe = { enabled = false },
+							},
+						},
+					},
+				},
 
 				lua_ls = {
 					-- cmd = {...},
@@ -241,22 +264,6 @@ return {
 				},
 			})
 		end,
-		opts = {
-			servers = {
-				pylsp = {
-					settings = {
-						pylsp = {
-							plugins = {
-								autopep8 = {
-									enabled = true,
-									args = { "--aggressive" },
-								},
-							},
-						},
-					},
-				},
-			},
-		},
 	},
 }
 -- vim: ts=2 sts=2 sw=2 et
