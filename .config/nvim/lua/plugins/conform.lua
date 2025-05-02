@@ -5,7 +5,7 @@ return {
 		cmd = { "ConformInfo" },
 		keys = {
 			{
-				"<leader>f",
+				"<leader>F",
 				function()
 					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
@@ -22,7 +22,7 @@ return {
 				local disable_filetypes = { c = true, cpp = true, python = true }
 				local lsp_format_opt
 				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = "never"
+					return false
 				else
 					lsp_format_opt = "fallback"
 				end
@@ -35,7 +35,7 @@ return {
 				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
-				-- python = { "ruff_format" },
+				python = { "ruff_format" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },

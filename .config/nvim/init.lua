@@ -33,7 +33,31 @@ require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } }, {
 })
 
 -- [[ Basic Keymaps ]]
--- require("keymaps")
+-- Buffer navigation
+vim.keymap.set("n", "<C-p>", ":bprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-n>", ":bnext<CR>", { noremap = true, silent = true })
 
--- The line beneath this is called `modeline`. See `:help modeline`
+-- Window navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+
+function _G.toggle_diagnostics()
+	if vim.diagnostic.is_enabled() then
+		vim.diagnostic.enable(false)
+		vim.notify("Diagnostics disabled for current buffer", vim.log.levels.INFO)
+	else
+		vim.diagnostic.enable()
+		vim.notify("Diagnostics enabled for current buffer", vim.log.levels.INFO)
+	end
+end
+
+vim.keymap.set(
+	"n",
+	"<leader>td",
+	"<cmd>lua _G.toggle_diagnostics()<CR>",
+	{ noremap = true, silent = true, desc = "Toggle diagnostics for current buffer" }
+)
+--
 -- vim: ts=2 sts=2 sw=2 et
