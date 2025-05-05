@@ -1,5 +1,6 @@
 return { -- Collection of various small independent plugins/modules
 	"echasnovski/mini.nvim",
+	lazy = false,
 	config = function()
 		-- Better Around/Inside textobjects
 		--
@@ -33,6 +34,11 @@ return { -- Collection of various small independent plugins/modules
 
 		require("mini.git").setup({})
 		require("mini.diff").setup({})
+		require("mini.basics").setup({
+			mappings = {
+				windows = true,
+			},
+		})
 	end,
 	keys = {
 		{ "<leader>gs", "<Cmd>lua MiniGit.show_at_cursor()<CR>", desc = "Show at cursor", mode = { "n", "x" } },
