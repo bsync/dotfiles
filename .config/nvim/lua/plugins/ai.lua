@@ -7,7 +7,7 @@ return {
 			-- Providers must be explicitly added to make them available.
 			providers = {
 				anthropic = {
-					api_key = { "gopass", "show", "-o", "api/anthropic/key" },
+					api_key = os.getenv("ANTHROPIC_API_KEY"),
 				},
 			},
 		})
