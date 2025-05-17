@@ -17,3 +17,6 @@ end
 
 vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true })
 vim.keymap.set("n", "<leader>;", ":Telescope buffers<CR>", { desc = "List buffers" })
+vim.keymap.set("n", "<leader>fw", ":Telescope grep_string<CR>", { desc = "Find word (under cursor)" })
+
+-- vim.g.autoformat = false
