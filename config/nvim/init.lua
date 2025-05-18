@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#1a3a5a", bold = true })
 	end,
 })
-vim.cmd.colorscheme("tokyonight-moon")
+vim.cmd.colorscheme("murphy")
 
 local snacks_loaded, snacks = pcall(require, "snacks")
 if snacks_loaded then

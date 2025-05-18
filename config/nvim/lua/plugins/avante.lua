@@ -56,4 +56,7 @@ return {
 			ft = { "markdown", "Avante" },
 		},
 	},
+	web_search_engine = {
+		provider = "google",
+	},
 }
