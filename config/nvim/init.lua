@@ -1,22 +1,50 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+vim.g.mapleader = ";"
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		-- You can inspect existing highlights using :hi under the colorscheme
-		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#1a3a5a", bold = true })
-		vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#1a3a5a", bold = true })
-	end,
-})
-vim.cmd.colorscheme("catppuccin-macchiato")
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-local snacks_loaded, snacks = pcall(require, "snacks")
-if snacks_loaded then
-	snacks.dim(true)
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
 
-vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true })
-vim.keymap.set("n", "<leader>;", ":Telescope buffers<CR>", { desc = "List buffers" })
-vim.keymap.set("n", "<leader>fw", ":Telescope grep_string<CR>", { desc = "Find word (under cursor)" })
+vim.opt.rtp:prepend(lazypath)
 
--- vim.g.autoformat = false
+local lazy_config = require "configs.lazy"
+
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+  },
+
+  { import = "plugins" },
+}, lazy_config)
+
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "options"
+require "autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)
+
+vim.g.clipboard = {
+  name = 'WslClipboard',
+  copy = {
+    ['+'] = 'clip.exe',
+    ['*'] = 'clip.exe',
+  },
+  paste = {
+    ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  },
+  cache_enabled = 0,
+}
