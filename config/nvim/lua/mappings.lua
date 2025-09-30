@@ -15,6 +15,7 @@ wk.add({ "<leader>;", function() require("telescope.builtin").buffers() end, des
 
 -- Add AI group mappings
 wk.add({ "<leader>a", group = "AI" })
+wk.add({ "<leader>ac", ":ClaudeCode<CR>", desc="Toggle ClaudeCode"})
 
 -- Add buffer group mappings
 wk.add({
@@ -123,3 +124,7 @@ vim.keymap.del('n', '<leader>x')
 vim.keymap.del('n', '<leader>h')
 vim.keymap.del('n', '<leader>v')
 vim.keymap.del('n', '<leader>b')
+
+vim.keymap.set('n', 'K', function()
+  vim.lsp.buf.hover({border = 'rounded' })
+end, { desc = "LSP Hover"})
