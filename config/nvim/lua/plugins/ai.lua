@@ -1,11 +1,17 @@
 return {
-  "greggh/claude-code.nvim",
-  lazy = true,
-  cmd = "ClaudeCode",
+  'NickvanDyke/opencode.nvim',
+  lazy=false,
   dependencies = {
-    "nvim-lua/plenary.nvim", -- Required for git operations
+    -- Recommended for `ask()`, and required for `toggle()` — otherwise optional
+    { 'folke/snacks.nvim', opts = { input = { enabled = true } } },
   },
   config = function()
-    require("claude-code").setup()
+    vim.g.opencode_opts = {
+      -- Your configuration, if any — see `lua/opencode/config.lua`
+      auto_fallback_to_embedded = false,
+    }
+
+    -- Required for `opts.auto_reload`
+    vim.opt.autoread = true
   end
 }

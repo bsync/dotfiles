@@ -14,8 +14,22 @@ local wk = require("which-key")
 wk.add({ "<leader>;", function() require("telescope.builtin").buffers() end, desc="List buffers" })
 
 -- Add AI group mappings
-wk.add({ "<leader>a", group = "AI" })
-wk.add({ "<leader>ac", ":ClaudeCode<CR>", desc="Toggle ClaudeCode"})
+wk.add({
+  { "<leader>a", group = "AI" },
+  { "<leader>at", function() require('opencode').toggle() end, desc = 'Toggle embedded' },
+  { "<leader>aa", function() require('opencode').ask('@cursor: ') end, desc = 'Ask about this', mode = "n" },
+  { "<leader>aa", function() require('opencode').ask('@selection: ') end, desc = 'Ask about selection', mode = "v" },
+  { "<leader>a+", function() require('opencode').prompt('@buffer', { append = true }) end, desc = 'Add buffer to prompt', mode = "n" },
+  { "<leader>a+", function() require('opencode').prompt('@selection', { append = true }) end, desc = 'Add selection to prompt', mode = "v" },
+  { "<leader>ae", function() require('opencode').prompt('Explain @cursor and its context') end, desc = 'Explain this code' },
+  { "<leader>an", function() require('opencode').command('session_new') end, desc = 'New session' },
+  { "<leader>as", function() require('opencode').select() end, desc = 'Select prompt', mode = { "n", "v" } },
+})
+
+wk.add({
+  { "<S-C-u>", function() require('opencode').command('messages_half_page_up') end, desc = 'Messages half page up' },
+  { "<S-C-d>", function() require('opencode').command('messages_half_page_down') end, desc = 'Messages half page down' },
+})
 
 -- Add buffer group mappings
 wk.add({
