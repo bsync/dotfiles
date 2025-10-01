@@ -8,7 +8,6 @@ return {
   config = function()
     vim.g.opencode_opts = {
       -- Your configuration, if any — see `lua/opencode/config.lua`
-      auto_fallback_to_embedded = false,
     }
 
     -- Required for `opts.auto_reload`
